@@ -175,7 +175,12 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
             child: AnimatedAlign(
               duration: Duration(milliseconds: ANIM_DURATION),
               curve: Curves.easeOut,
-              alignment: Alignment(_circleAlignX, 1),
+              alignment: Alignment(
+                  _circleAlignX *
+                      (Directionality.of(context) == TextDirection.rtl
+                          ? -1
+                          : 1),
+                  1),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 14),
                 child: FractionallySizedBox(
