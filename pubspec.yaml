@@ -5,12 +5,14 @@ author: Smart Apeth <tony@smartapeth.com>
 homepage: https://github.com/tunitowen/fancy_bottom_navigation
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   vector_math: ^2.0.8
+  # https://pub.dev/packages/auto_size_text
+  auto_size_text: 2.1.0
 
 dev_dependencies:
   flutter_test:

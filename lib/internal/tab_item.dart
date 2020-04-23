@@ -1,10 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:ui' as ui;
 
 const double ICON_OFF = -3;
 const double ICON_ON = 0;
-const double TEXT_OFF = 3;
+const double TEXT_OFF = 4;
 const double TEXT_ON = 1;
 const double ALPHA_OFF = 0;
 const double ALPHA_ON = 1;
@@ -47,10 +48,13 @@ class TabItem extends StatelessWidget {
                 duration: Duration(milliseconds: ANIM_DURATION),
                 alignment: Alignment(0, (selected) ? TEXT_ON : TEXT_OFF),
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
+
+                  padding: const EdgeInsets.all(8.0),
+                  child: AutoSizeText(
+
                     title,
-                    overflow: TextOverflow.ellipsis,
+                    minFontSize: 8,
+                   // overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: TextStyle(
                         fontWeight: FontWeight.w600, color: textColor),

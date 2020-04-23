@@ -5,19 +5,18 @@ import 'package:fancy_bottom_navigation/paint/half_clipper.dart';
 import 'package:fancy_bottom_navigation/paint/half_painter.dart';
 import 'package:flutter/material.dart';
 
-const double CIRCLE_SIZE = 60;
-const double ARC_HEIGHT = 70;
-const double ARC_WIDTH = 90;
-const double CIRCLE_OUTLINE = 10;
-const double SHADOW_ALLOWANCE = 20;
-const double BAR_HEIGHT = 60;
-
 class FancyBottomNavigation extends StatefulWidget {
   FancyBottomNavigation(
       {@required this.tabs,
       @required this.onTabChangedListener,
       this.key,
       this.initialSelection = 0,
+      this.circleSize = 60,
+      this.arcHeight = 70,
+      this.arcWidth = 90,
+      this.circleOutline = 10,
+      this.shadowAllowance = 20,
+      this.barHeight = 60,
       this.circleColor,
       this.activeIconColor,
       this.inactiveIconColor,
@@ -25,8 +24,7 @@ class FancyBottomNavigation extends StatefulWidget {
       this.gradient,
       this.barBackgroundColor})
       : assert(onTabChangedListener != null),
-        assert(tabs != null),
-        assert(tabs.length > 1 && tabs.length < 5);
+        assert(tabs != null);
 
   final Function(int position) onTabChangedListener;
   final Color circleColor;
@@ -37,6 +35,12 @@ class FancyBottomNavigation extends StatefulWidget {
   final Color barBackgroundColor;
   final List<TabData> tabs;
   final int initialSelection;
+  final double circleSize;
+  final double arcHeight;
+  final double arcWidth;
+  final double circleOutline;
+  final double shadowAllowance;
+  final double barHeight;
 
   final Key key;
 
@@ -125,7 +129,7 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
       alignment: Alignment.bottomCenter,
       children: <Widget>[
         Container(
-          height: BAR_HEIGHT,
+          height: widget.barHeight,
           decoration: BoxDecoration(color: barBackgroundColor, boxShadow: [
             BoxShadow(color: shadowColor, offset: Offset(0, -1), blurRadius: 8)
           ]),
@@ -152,7 +156,10 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
           ),
         ),
         Positioned.fill(
-          top: -(CIRCLE_SIZE + CIRCLE_OUTLINE + SHADOW_ALLOWANCE) / 2,
+          top: -(widget.circleSize +
+                  widget.circleOutline +
+                  widget.shadowAllowance) /
+              2,
           child: Container(
             child: AnimatedAlign(
               duration: Duration(milliseconds: ANIM_DURATION),
@@ -168,17 +175,21 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
                       alignment: Alignment.center,
                       children: <Widget>[
                         SizedBox(
-                          height:
-                              CIRCLE_SIZE + CIRCLE_OUTLINE + SHADOW_ALLOWANCE,
-                          width:
-                              CIRCLE_SIZE + CIRCLE_OUTLINE + SHADOW_ALLOWANCE,
+                          height: widget.circleSize +
+                              widget.circleOutline +
+                              widget.shadowAllowance,
+                          width: widget.circleSize +
+                              widget.circleOutline +
+                              widget.shadowAllowance,
                           child: ClipRect(
                               clipper: HalfClipper(),
                               child: Container(
                                 child: Center(
                                   child: Container(
-                                      width: CIRCLE_SIZE + CIRCLE_OUTLINE,
-                                      height: CIRCLE_SIZE + CIRCLE_OUTLINE,
+                                      width: widget.circleSize +
+                                          widget.circleOutline,
+                                      height: widget.circleSize +
+                                          widget.circleOutline,
                                       decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -190,14 +201,14 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
                               )),
                         ),
                         SizedBox(
-                            height: ARC_HEIGHT,
-                            width: ARC_WIDTH,
+                            height: widget.arcHeight,
+                            width: widget.arcWidth,
                             child: CustomPaint(
                               painter: HalfPainter(barBackgroundColor),
                             )),
                         SizedBox(
-                          height: CIRCLE_SIZE - 5,
-                          width: CIRCLE_SIZE - 5,
+                          height: widget.circleSize,
+                          width: widget.circleSize,
                           child: Container(
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle, 
