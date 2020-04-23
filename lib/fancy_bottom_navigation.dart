@@ -21,6 +21,7 @@ class FancyBottomNavigation extends StatefulWidget {
       this.activeIconColor,
       this.inactiveIconColor,
       this.textColor,
+      this.gradient,
       this.barBackgroundColor})
       : assert(onTabChangedListener != null),
         assert(tabs != null);
@@ -30,6 +31,7 @@ class FancyBottomNavigation extends StatefulWidget {
   final Color activeIconColor;
   final Color inactiveIconColor;
   final Color textColor;
+  final Gradient gradient;
   final Color barBackgroundColor;
   final List<TabData> tabs;
   final int initialSelection;
@@ -60,6 +62,8 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
   Color inactiveIconColor;
   Color barBackgroundColor;
   Color textColor;
+  Gradient gradient;
+  Color shadowColor;
 
   @override
   void didChangeDependencies() {
@@ -94,6 +98,10 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
             ? Colors.white
             : Theme.of(context).primaryColor
         : widget.inactiveIconColor;
+    gradient = widget.gradient;
+    shadowColor = Theme.of(context).brightness == Brightness.dark
+        ? Colors.white54
+        : Colors.black12;
   }
 
   @override
@@ -123,8 +131,7 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
         Container(
           height: widget.barHeight,
           decoration: BoxDecoration(color: barBackgroundColor, boxShadow: [
-            BoxShadow(
-                color: Colors.black12, offset: Offset(0, -1), blurRadius: 8)
+            BoxShadow(color: shadowColor, offset: Offset(0, -1), blurRadius: 8)
           ]),
           child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -136,6 +143,7 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
                     iconData: t.iconData,
                     title: t.title,
                     iconColor: inactiveIconColor,
+                    gradient: this.gradient,
                     textColor: textColor,
                     callbackFunction: (uniqueKey) {
                       int selected = widget.tabs
@@ -158,7 +166,7 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
               curve: Curves.easeOut,
               alignment: Alignment(_circleAlignX, 1),
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 15),
+                padding: const EdgeInsets.only(bottom: 14),
                 child: FractionallySizedBox(
                   widthFactor: 1 / widget.tabs.length,
                   child: GestureDetector(
@@ -183,11 +191,10 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
                                       height: widget.circleSize +
                                           widget.circleOutline,
                                       decoration: BoxDecoration(
-                                          color: Colors.white,
                                           shape: BoxShape.circle,
                                           boxShadow: [
                                             BoxShadow(
-                                                color: Colors.black12,
+                                                color: shadowColor,
                                                 blurRadius: 8)
                                           ])),
                                 ),
@@ -204,7 +211,9 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
                           width: widget.circleSize,
                           child: Container(
                             decoration: BoxDecoration(
-                                shape: BoxShape.circle, color: circleColor),
+                                shape: BoxShape.circle, 
+                                gradient: this.gradient,
+                                color: circleColor),
                             child: Padding(
                               padding: const EdgeInsets.all(0.0),
                               child: AnimatedOpacity(

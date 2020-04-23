@@ -7,7 +7,9 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
+
     version: "2.2.0"
+
   boolean_selector:
     dependency: transitive
     description:
@@ -80,7 +82,9 @@ packages:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
+
     version: "2.0.3"
+
   sky_engine:
     dependency: transitive
     description: flutter
@@ -127,7 +131,9 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
+
     version: "0.2.5"
+
   typed_data:
     dependency: transitive
     description:
@@ -143,4 +149,6 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
+
   dart: ">=2.2.2 <3.0.0"
+
