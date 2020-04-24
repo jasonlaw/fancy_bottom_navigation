@@ -110,7 +110,7 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
   @override
   void initState() {
     super.initState();
-    _setSelected(widget.tabs[widget.initialSelection].key);
+    //_setSelected(widget.tabs[widget.initialSelection].key);
 
     // add listener for page swipes
     if (this.widget.pageController != null) {
@@ -118,6 +118,8 @@ class FancyBottomNavigationState extends State<FancyBottomNavigation>
           () => this.setPageOffset(this.widget.pageController.page);
       this.widget.pageController.addListener(_pageControllerListener);
     }
+
+    setPage(widget.initialSelection);
   }
 
   _setSelected(UniqueKey key) {
