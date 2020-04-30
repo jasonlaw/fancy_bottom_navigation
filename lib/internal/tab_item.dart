@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:ui' as ui;
@@ -48,16 +47,33 @@ class TabItem extends StatelessWidget {
                 duration: Duration(milliseconds: ANIM_DURATION),
                 alignment: Alignment(0, (selected) ? TEXT_ON : TEXT_OFF),
                 child: Padding(
-
                   padding: const EdgeInsets.all(8.0),
-                  child: AutoSizeText(
 
-                    title,
-                    minFontSize: 8,
-                   // overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600, color: textColor),
+                  // child: AutoSizeText(
+                  //   title,
+                  //   minFontSize: 8,
+                  //   // overflow: TextOverflow.ellipsis,
+                  //   maxLines: 1,
+                  //   style: TextStyle(
+                  //       fontWeight: FontWeight.w600, color: textColor),
+                  // ),
+
+                  child: AnimatedDefaultTextStyle(
+                    duration: Duration(milliseconds: ANIM_DURATION),
+                    style: selected
+                        ? TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: textColor,
+                          )
+                        : TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.transparent,
+                          ),
+                    child: Text(
+                      title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ),
                 )),
           ),
@@ -80,11 +96,8 @@ class TabItem extends StatelessWidget {
                       ? ShaderMask(
                           blendMode: BlendMode.srcIn,
                           shaderCallback: (Rect bounds) {
-                            return ui.Gradient.linear(
-                              Offset(4.0, 24.0),
-                              Offset(24.0, 4.0),
-                              this.gradient.colors
-                            );
+                            return ui.Gradient.linear(Offset(4.0, 24.0),
+                                Offset(24.0, 4.0), this.gradient.colors);
                           },
                           child: Icon(iconData),
                         )
